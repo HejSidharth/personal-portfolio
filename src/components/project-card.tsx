@@ -29,6 +29,7 @@ import SolidLogo from "@/assets/solidjs.png";
 import SCSSLogo from "@/assets/scss.png";
 import FigmaLogo from "@/assets/figma.ico";
 import ChakraLogo from "@/assets/Chakra.png";
+import NextjsLogo from "@/assets/nextjs.svg";
 
 type CardProps = {
   title: string;
@@ -54,6 +55,7 @@ const techStackDictionary: TechStackDictionary = {
   SCSS: { name: "SCSS", img: SCSSLogo },
   Figma: { name: "Figma", img: FigmaLogo },
   Chakra: { name: "Chakra", img: ChakraLogo },
+  "Next.js": { name: "Next.js", img: NextjsLogo },
 };
 
 const CustomCard: React.FC<CardProps> = ({
@@ -106,12 +108,24 @@ const CustomCard: React.FC<CardProps> = ({
     </Card>
   );
 
+  const isExternalLink =
+    href && (href.startsWith("http://") || href.startsWith("https://"));
+
   return href ? (
-    <Link to={href} className="flex w-full h-full">
-      <div className="w-full h-full">
-        {card}
-      </div>
-    </Link>
+    isExternalLink ? (
+      <a
+        href={href}
+        target="_blank"
+        rel="noopener noreferrer"
+        className="flex w-full h-full"
+      >
+        <div className="w-full h-full">{card}</div>
+      </a>
+    ) : (
+      <Link to={href} className="flex w-full h-full">
+        <div className="w-full h-full">{card}</div>
+      </Link>
+    )
   ) : (
     <div className="w-full h-full">{card}</div>
   );
@@ -225,6 +239,17 @@ export function TeamPayCard() {
       description="Worked on a SAAS that helped business owners track pay"
       href={ROUTES.projectsTeamPay}
       stack={["Typescript", "React", "Supabase", "Tailwind"]}
+    />
+  );
+}
+
+export function FacesCard() {
+  return (
+    <CustomCard
+      title="Faces"
+      description="A website to help people use avatars for their projects"
+      href="https://faces.hejamadi.com"
+      stack={["React", "Appwrite", "Typescript", "Tailwind"]}
     />
   );
 }

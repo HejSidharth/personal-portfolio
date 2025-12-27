@@ -1,15 +1,18 @@
 import { Link } from "react-router-dom";
 import { MoveRight } from "lucide-react";
 import { motion } from "framer-motion";
+import { useState, useEffect } from "react";
 
-import {
-  NotemonCard,
-  TeamPayCard,
-  TrackalackCard,
-} from "@/components/project-card";
+import { NotemonCard, TeamPayCard, FacesCard } from "@/components/project-card";
 import PageContainer from "@/components/PageContainer";
 import ExperienceItem from "@/components/ExperienceItem";
 import { SITE_CONFIG, ROUTES } from "@/config/constants";
+import {
+  Tooltip,
+  TooltipProvider,
+  TooltipContent,
+  TooltipTrigger,
+} from "@/components/ui/tooltip";
 import profileImage from "@/assets/my-notion-face-transparent.png";
 import profileImageHover from "@/assets/my-notion-face-transparent (1).png";
 import whatnotLogo from "@/assets/logos/whatnot.png";
@@ -18,6 +21,29 @@ import codeYourDreamsLogo from "@/assets/logos/codeyourdreams.png";
 import foodRecoveryLogo from "@/assets/cropped-FoodRecovery_AppleLogo_ColorUpdates-COLOR-NOTEXT.png";
 
 export default function HomePage() {
+  const [joke, setJoke] = useState<string>("Loading joke...");
+
+  useEffect(() => {
+    const fetchJoke = async () => {
+      try {
+        const response = await fetch("https://icanhazdadjoke.com/", {
+          headers: {
+            Accept: "application/json",
+          },
+        });
+        const data = await response.json();
+        setJoke(
+          data.joke ||
+            "Why did the programmer quit? Because they didn't get arrays!"
+        );
+      } catch (error) {
+        setJoke("Why did the programmer quit? Because they didn't get arrays!");
+      }
+    };
+
+    fetchJoke();
+  }, []);
+
   return (
     <motion.div
       initial={{ opacity: 0 }}
@@ -57,18 +83,27 @@ export default function HomePage() {
             </div>
             {/* Profile Picture */}
             <div className="hidden sm:block flex-shrink-0">
-              <div className="w-24 h-24 rounded-full bg-muted border-2 border-border flex items-center justify-center overflow-hidden relative group">
-                <img
-                  src={profileImage}
-                  alt={SITE_CONFIG.name}
-                  className="w-full h-full object-cover group-hover:opacity-0 transition-opacity duration-300"
-                />
-                <img
-                  src={profileImageHover}
-                  alt={SITE_CONFIG.name}
-                  className="w-full h-full object-cover absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
-                />
-              </div>
+              <TooltipProvider>
+                <Tooltip>
+                  <TooltipTrigger asChild>
+                    <div className="w-24 h-24 rounded-full bg-muted border-2 border-border flex items-center justify-center overflow-hidden relative group cursor-pointer">
+                      <img
+                        src={profileImage}
+                        alt={SITE_CONFIG.name}
+                        className="w-full h-full object-cover group-hover:opacity-0 transition-opacity duration-300"
+                      />
+                      <img
+                        src={profileImageHover}
+                        alt={SITE_CONFIG.name}
+                        className="w-full h-full object-cover absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+                      />
+                    </div>
+                  </TooltipTrigger>
+                  <TooltipContent className="max-w-xs">
+                    <p className="text-sm">{joke}</p>
+                  </TooltipContent>
+                </Tooltip>
+              </TooltipProvider>
             </div>
           </div>
 
@@ -123,8 +158,8 @@ export default function HomePage() {
               <MoveRight className="w-4 h-4" />
             </Link>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-4">
+              <FacesCard />
               <TeamPayCard />
-              <TrackalackCard />
               <NotemonCard />
             </div>
           </section>
