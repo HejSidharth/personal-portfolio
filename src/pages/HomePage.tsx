@@ -1,20 +1,20 @@
+import { Link } from "react-router-dom";
+import { MoveRight } from "lucide-react";
+import { motion } from "framer-motion";
+
 import {
-  GeicoCard,
-  InclusiveStemCard,
   NotemonCard,
-  OpenAQCard,
   TeamPayCard,
   TrackalackCard,
 } from "@/components/project-card";
-import { Link } from "react-router-dom";
-import {
-  Tooltip,
-  TooltipProvider,
-  TooltipContent,
-  TooltipTrigger,
-} from "@/components/ui/tooltip";
-import { Github, Linkedin, MoveRight } from "lucide-react";
-import { motion } from "framer-motion";
+import PageContainer from "@/components/PageContainer";
+import ExperienceItem from "@/components/ExperienceItem";
+import { SITE_CONFIG, ROUTES } from "@/config/constants";
+import profileImage from "@/assets/my-notion-face-transparent.png";
+import profileImageHover from "@/assets/my-notion-face-transparent (1).png";
+import whatnotLogo from "@/assets/logos/whatnot.png";
+import geicoLogo from "@/assets/logos/geico.png";
+import codeYourDreamsLogo from "@/assets/logos/codeyourdreams.png";
 
 export default function HomePage() {
   return (
@@ -23,84 +23,112 @@ export default function HomePage() {
       animate={{ opacity: 1 }}
       transition={{ duration: 2 }}
     >
-      <div className="lg:w-1/2 max-w-[600px] justify-center mx-auto px-10 sm:px-0 md:px-0">
-        <div className="flex gap-4 flex-col">
-          <div className="flex justify-between items-center">
-            <button className="font-bold border-b-2 text-lg hover:border-neutral-600 inline-block font-inter">
-              Sidharth Hejamadi
-            </button>
-            <div className="flex gap-3">
-              <TooltipProvider>
-                <Tooltip>
-                  <TooltipTrigger asChild>
-                    <a
-                      href={"https://github.com/HejSidharth"}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                    >
-                      <Github className="w-5 h-5 hover:text-gray-400" />
-                    </a>
-                  </TooltipTrigger>
-                  <TooltipContent>
-                    <p>GitHub</p>
-                  </TooltipContent>
-                </Tooltip>
-              </TooltipProvider>
-              <TooltipProvider>
-                <Tooltip>
-                  <TooltipTrigger asChild>
-                    <a
-                      href={"https://www.linkedin.com/in/sidharth-hejamadi"}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                    >
-                      <Linkedin className="w-5 h-5 hover:text-blue-600" />
-                    </a>
-                  </TooltipTrigger>
-                  <TooltipContent>
-                    <p>LinkedIn</p>
-                  </TooltipContent>
-                </Tooltip>
-              </TooltipProvider>
+      <PageContainer>
+        <div className="flex flex-col gap-3 py-8 max-w-2xl mx-auto ">
+          {/* Header Section */}
+          <div className="flex items-start justify-between gap-8">
+            <div className="flex-1">
+              <button className="font-bold border-b-2 text-lg hover:border-yellow-500 inline-block font-inter mb-4">
+                {SITE_CONFIG.name}
+              </button>
+              <div className="mt-4">
+                <p className="font-inter text-base">
+                  <span className="italic font-newsreader hover:text-yellow-500 cursor-pointer">
+                    {SITE_CONFIG.description}
+                  </span>{" "}
+                  This is what I do. I am {SITE_CONFIG.name}, and I love solving
+                  problems. I'm a student at the{" "}
+                  <span className="italic font-newsreader hover:text-[#FF5F05] underline cursor-pointer">
+                    {SITE_CONFIG.university}
+                  </span>{" "}
+                  studying {SITE_CONFIG.major}.
+                </p>
+                <p className="font-inter text-sm text-muted-foreground mt-4">
+                  Contact me at:{" "}
+                  <a
+                    href="mailto:hejamadisidharth@gmail.com"
+                    className="hover:text-yellow-500 transition-colors"
+                  >
+                    hejamadisidharth [at] gmail [dot] com
+                  </a>
+                </p>
+              </div>
+            </div>
+            {/* Profile Picture */}
+            <div className="hidden sm:block flex-shrink-0">
+              <div className="w-24 h-24 rounded-full bg-muted border-2 border-border flex items-center justify-center overflow-hidden relative group">
+                <img
+                  src={profileImage}
+                  alt={SITE_CONFIG.name}
+                  className="w-full h-full object-cover group-hover:opacity-0 transition-opacity duration-300"
+                />
+                <img
+                  src={profileImageHover}
+                  alt={SITE_CONFIG.name}
+                  className="w-full h-full object-cover absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+                />
+              </div>
             </div>
           </div>
 
-          <div>
-            <p className="font-inter text-base">
-              <span className="italic font-newsreader">
-                Coding, designing, and building.
-              </span>{" "}
-              This is what I do, I am Sidharth Hejamadi and I love solving
-              problems. I attend the{" "}
-              <span className="italic font-newsreader">
-                University of Urbana-Champaign
-              </span>{" "}
-              studying Computer Science and Statistics.
-            </p>
-          </div>
-          <button className="font-newsreader italic font-medium mt-10 border-b-2 w-max hover:border-neutral-600">
-            Featured Experience
-          </button>
-          <div className="flex flex-col gap-6 md:grid md:grid-cols-3">
-            <GeicoCard />
-            <OpenAQCard />
-            <InclusiveStemCard />
-          </div>
-          <Link
-            to={"/projects"}
-            className="font-newsreader italic font-medium mt-10 border-b-2 w-max hover:border-neutral-600 flex items-center gap-2"
-          >
-            Featured Projects
-            <MoveRight className="w-4 h-4" />
-          </Link>
-          <div className="flex flex-col gap-6 md:grid md:grid-cols-3">
-            <TeamPayCard />
-            <TrackalackCard />
-            <NotemonCard />
-          </div>
+          {/* About Section */}
+
+          {/* Work Experience Section */}
+          <section>
+            <button className="font-newsreader italic font-medium mt-10 border-b-2 w-max hover:border-yellow-500">
+              Work Experience
+            </button>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-2 mt-4">
+              <ExperienceItem
+                company="WhatNot"
+                title="Incoming SWE Intern"
+                period="Summer 2026"
+                href="https://www.whatnot.com"
+                logo={whatnotLogo}
+              />
+              <ExperienceItem
+                company="GEICO"
+                title="Software Engineering Intern"
+                period="Summer 2025"
+                href="https://geico.com"
+                description=""
+                logo={geicoLogo}
+              />
+              <ExperienceItem
+                company="Code Your Dreams"
+                title="TPM"
+                period="Spring 2025"
+                href="https://codeyourdreams.org"
+                description=""
+                logo={codeYourDreamsLogo}
+              />
+              <ExperienceItem
+                company="Food Recovery.org"
+                title="TPM"
+                period="Fall 2024"
+                href="https://foodrecovery.org"
+                logo="/logo-light.svg"
+              />
+            </div>
+          </section>
+
+          {/* Projects Section */}
+          <section>
+            <Link
+              to={ROUTES.projects}
+              className="font-newsreader italic font-medium mt-10 border-b-2 w-max hover:border-yellow-500 flex items-center gap-2"
+            >
+              Featured Projects
+              <MoveRight className="w-4 h-4" />
+            </Link>
+            <div className="flex flex-col gap-6 md:grid md:grid-cols-3 mt-4">
+              <TeamPayCard />
+              <TrackalackCard />
+              <NotemonCard />
+            </div>
+          </section>
         </div>
-        <footer className="h-10"> {/* This is a box */}</footer>
-      </div>
+      </PageContainer>
     </motion.div>
   );
 }

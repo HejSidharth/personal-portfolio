@@ -1,11 +1,10 @@
-import { Link } from "react-router-dom";
+import React from "react";
 import { Github, AppWindow } from "lucide-react";
-import {
-  Tooltip,
-  TooltipContent,
-  TooltipProvider,
-  TooltipTrigger,
-} from "@/components/ui/tooltip";
+
+import BackButton from "@/components/back-button";
+import PageContainer from "@/components/PageContainer";
+import SectionHeader from "@/components/SectionHeader";
+import SocialLink from "@/components/SocialLink";
 import StackCard from "@/components/stack-card";
 import { CardDescription } from "@/components/ui/card";
 import {
@@ -16,7 +15,7 @@ import {
   CarouselPrevious,
   type CarouselApi,
 } from "@/components/ui/carousel";
-import React from "react";
+import { ROUTES } from "@/config/constants";
 
 interface TechStackItem {
   title: string;
@@ -60,94 +59,32 @@ const ProjectPage: React.FC<ProjectPageProps> = ({
       setCurrent(api.selectedScrollSnap() + 1);
     });
   }, [api]);
+
   return (
     <>
-      <div className="px-10 hidden sm:block fixed">
-        <Link
-          className="text-white p-2  mr-4 font-newsreader italic flex gap-2"
-          to={"/projects"}
-        >
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            width="20"
-            height="20"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            strokeWidth="1.5"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            className="lucide lucide-undo-2"
-          >
-            <path d="M9 14 4 9l5-5" />
-            <path d="M4 9h10.5a5.5 5.5 0 0 1 5.5 5.5a5.5 5.5 0 0 1-5.5 5.5H11" />
-          </svg>
-          Projects
-        </Link>
-      </div>
-      <div className="lg:w-1/2 max-w-[600px] justify-center mx-auto px-10 sm:px-0 md:px-0">
+      <BackButton title="Projects" href={ROUTES.projects} />
+      <PageContainer>
         <div className="flex gap-4 flex-col">
-        <Link
-              className="text-white p-2 sm:hidden mr-4 font-newsreader italic flex gap-2 translate-x-[-20px] translate-y-[-30px]"
-              to={"/projects"}
-            >
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="20"
-                height="20"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                stroke-width="1.5"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                className="lucide lucide-undo-2"
-              >
-                <path d="M9 14 4 9l5-5" />
-                <path d="M4 9h10.5a5.5 5.5 0 0 1 5.5 5.5a5.5 5.5 0 0 1-5.5 5.5H11" />
-              </svg>
-              Projects
-            </Link>
           <div className="flex justify-between items-center">
-            <button className="font-bold border-b-2 text-lg hover:border-neutral-600 inline-block font-inter">
+            <button className="font-bold border-b-2 text-lg hover:border-yellow-500 inline-block font-inter">
               {title}
             </button>
             <div className="flex gap-4">
               {websiteLink && (
-                <TooltipProvider>
-                  <Tooltip>
-                    <TooltipTrigger asChild>
-                      <a
-                        href={websiteLink}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                      >
-                        <AppWindow className="hover:text-border" />
-                      </a>
-                    </TooltipTrigger>
-                    <TooltipContent>
-                      <p>Visit Website</p>
-                    </TooltipContent>
-                  </Tooltip>
-                </TooltipProvider>
+                <SocialLink
+                  icon={AppWindow}
+                  href={websiteLink}
+                  label="Visit Website"
+                  iconClassName="hover:text-yellow-500"
+                />
               )}
               {githubLink && (
-                <TooltipProvider>
-                  <Tooltip>
-                    <TooltipTrigger asChild>
-                      <a
-                        href={githubLink}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                      >
-                        <Github className="hover:text-border" />
-                      </a>
-                    </TooltipTrigger>
-                    <TooltipContent>
-                      <p>GitHub</p>
-                    </TooltipContent>
-                  </Tooltip>
-                </TooltipProvider>
+                <SocialLink
+                  icon={Github}
+                  href={githubLink}
+                  label="GitHub"
+                  iconClassName="hover:text-yellow-500"
+                />
               )}
             </div>
           </div>
@@ -174,9 +111,7 @@ const ProjectPage: React.FC<ProjectPageProps> = ({
               {description}
             </CardDescription>
           </div>
-          <button className="font-newsreader italic font-medium mt-10 border-b-2 w-max hover:border-neutral-600">
-            Tech Stack
-          </button>
+          <SectionHeader>Tech Stack</SectionHeader>
           <div className="flex flex-col gap-6 md:grid md:grid-cols-3 mb-10">
             {techStack.map((tech, index) => (
               <StackCard
@@ -189,7 +124,7 @@ const ProjectPage: React.FC<ProjectPageProps> = ({
             ))}
           </div>
         </div>
-      </div>
+      </PageContainer>
     </>
   );
 };

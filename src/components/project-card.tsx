@@ -1,3 +1,6 @@
+import { Link } from "react-router-dom";
+import { MoreHorizontal } from "lucide-react";
+
 import {
   Card,
   CardHeader,
@@ -11,6 +14,9 @@ import {
   TooltipContent,
   TooltipTrigger,
 } from "@/components/ui/tooltip";
+import { ROUTES } from "@/config/constants";
+
+// Tech stack logo imports
 import ReactLogo from "@/assets/react.svg";
 import TailwindLogo from "@/assets/tailwindcss.svg";
 import SupabaseLogo from "@/assets/supabase-logo-icon.svg";
@@ -24,9 +30,6 @@ import SCSSLogo from "@/assets/scss.png";
 import FigmaLogo from "@/assets/figma.ico";
 import ChakraLogo from "@/assets/Chakra.png";
 
-import { Link } from "react-router-dom";
-import { MoreHorizontal } from "lucide-react";
-
 type CardProps = {
   title: string;
   description: string;
@@ -34,11 +37,11 @@ type CardProps = {
   stack?: string[];
 };
 
-interface Dictionary {
+interface TechStackDictionary {
   [key: string]: { name: string; img: string };
 }
 
-let dStack: Dictionary = {
+const techStackDictionary: TechStackDictionary = {
   React: { name: "React", img: ReactLogo },
   Tailwind: { name: "Tailwind", img: TailwindLogo },
   Supabase: { name: "Supabase", img: SupabaseLogo },
@@ -63,31 +66,36 @@ const CustomCard: React.FC<CardProps> = ({
     <Card>
       <CardHeader>
         <CardTitle className="text-base inline-flex ">
-          <span className="border-b-2 hover:border-neutral-600">{title}</span>
+          <span className="border-b-2 hover:border-yellow-500">{title}</span>
         </CardTitle>
         <CardDescription>{description}</CardDescription>
       </CardHeader>
       <CardContent>
         <div className="flex gap-2 items-center">
           {stack &&
-            stack.map((tech, index) => (
-              <TooltipProvider key={index}>
-                <Tooltip key={index}>
-                  <TooltipTrigger asChild>
-                    <div className="">
-                      <img
-                        className="h-4 w-4 grayscale hover:grayscale-0 hover:rotate-6"
-                        src={dStack[tech]?.img}
-                        alt={tech}
-                      />
-                    </div>
-                  </TooltipTrigger>
-                  <TooltipContent>
-                    <p>{dStack[tech]?.name}</p>
-                  </TooltipContent>
-                </Tooltip>
-              </TooltipProvider>
-            ))}
+            stack.map((tech, index) => {
+              const techStackItem = techStackDictionary[tech];
+              if (!techStackItem) return null;
+
+              return (
+                <TooltipProvider key={index}>
+                  <Tooltip>
+                    <TooltipTrigger asChild>
+                      <div className="">
+                        <img
+                          className="h-4 w-4 grayscale hover:grayscale-0 hover:rotate-6"
+                          src={techStackItem.img}
+                          alt={techStackItem.name}
+                        />
+                      </div>
+                    </TooltipTrigger>
+                    <TooltipContent>
+                      <p>{techStackItem.name}</p>
+                    </TooltipContent>
+                  </Tooltip>
+                </TooltipProvider>
+              );
+            })}
           {stack && stack.length !== 0 && (
             <div className="border rounded-2xl grayscale p-1">
               <MoreHorizontal className="w-2 h-2" />
@@ -114,7 +122,7 @@ export function StudentQueueCard() {
     <CustomCard
       title="Student Queue"
       description="A website created to queue students during tutoring classes."
-      href="/projects/student-queue"
+      href={ROUTES.projectsStudentQueue}
       stack={["React", "Tailwind", "Supabase", "Clerk"]}
     />
   );
@@ -125,7 +133,7 @@ export function TrackalackCard() {
     <CustomCard
       title="Trackalack"
       description="A website created to track homework assignments for fellow students"
-      href="/projects/trackalack"
+      href={ROUTES.projectsTrackalack}
       stack={["React", "Clerk", "Tailwind", "Supabase"]}
     />
   );
@@ -136,7 +144,7 @@ export function NotemonCard() {
     <CustomCard
       title="Notemon"
       description="A website created to save code snippets for later use"
-      href="/projects/notemon"
+      href={ROUTES.projectsNotemon}
       stack={["React", "Clerk", "Tailwind", "Appwrite"]}
     />
   );
@@ -147,7 +155,7 @@ export function TaskmonCard() {
     <CustomCard
       title="Taskmon"
       description="A website created to store tasks with productivity and aesthetics"
-      href="/projects/taskmon"
+      href={ROUTES.projectsTaskmon}
       stack={["React", "Clerk", "Tailwind", "Appwrite"]}
     />
   );
@@ -178,7 +186,7 @@ export function ParaillelCard() {
 export function GeicoCard() {
   return (
     <CustomCard
-      title="Geico"
+      title="GEICO"
       description="Software Engineering Intern at Geico | Database Management"
       href="https://geico.com/"
       stack={[]}
@@ -213,7 +221,7 @@ export function TeamPayCard() {
     <CustomCard
       title="Team Pay"
       description="Worked on a SAAS that helped business owners track pay"
-      href="/projects/team-pay"
+      href={ROUTES.projectsTeamPay}
       stack={["Typescript", "React", "Supabase", "Tailwind"]}
     />
   );

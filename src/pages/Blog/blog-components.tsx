@@ -4,7 +4,7 @@ type Title = {
 
 const BlogTitle: React.FC<Title> = ({ title }) => {
     return (
-        <button className="font-bold border-b-2 text-lg hover:border-neutral-600 inline-block font-inter">
+        <button className="font-bold border-b-2 text-lg hover:border-yellow-500 inline-block font-inter">
         {title}
       </button>
     );
