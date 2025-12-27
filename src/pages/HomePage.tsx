@@ -103,7 +103,7 @@ export default function HomePage() {
                 logo={codeYourDreamsLogo}
               />
               <ExperienceItem
-                company="Food Recovery.org"
+                company="Food Recovery"
                 title="TPM"
                 period="Fall 2024"
                 href="https://foodrecovery.org"
