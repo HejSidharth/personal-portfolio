@@ -10,7 +10,6 @@ export default function DockNav() {
   const location = useLocation();
   const { setTheme } = useTheme();
   const [currentTheme, setCurrentTheme] = useState<"dark" | "light">("dark");
-  const [isMobile, setIsMobile] = useState(false);
 
   useEffect(() => {
     const isDark = document.documentElement.classList.contains("dark");
@@ -26,17 +25,7 @@ export default function DockNav() {
       attributeFilter: ["class"],
     });
 
-    // Check if mobile
-    const checkMobile = () => {
-      setIsMobile(window.innerWidth < 640); // sm breakpoint
-    };
-    checkMobile();
-    window.addEventListener("resize", checkMobile);
-
-    return () => {
-      observer.disconnect();
-      window.removeEventListener("resize", checkMobile);
-    };
+    return () => observer.disconnect();
   }, []);
 
   const isActive = (path: string) => location.pathname === path;
@@ -51,7 +40,7 @@ export default function DockNav() {
       <Dock 
         direction="bottom" 
         className="pointer-events-auto"
-        magnification={isMobile ? 40 : 60}
+        magnification={40}
       >
         <DockIcon>
           <Link

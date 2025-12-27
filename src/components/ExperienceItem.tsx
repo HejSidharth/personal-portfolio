@@ -26,7 +26,7 @@ export default function ExperienceItem({
           <img
             src={logo}
             alt={`${company} logo`}
-            className={`${logoSizeClass} rounded-full object-cover grayscale-0 sm:grayscale sm:group-hover:grayscale-0 transition-all duration-200`}
+            className={`${logoSizeClass} rounded-full object-cover`}
           />
         </div>
       )}

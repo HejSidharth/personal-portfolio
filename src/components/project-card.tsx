@@ -63,14 +63,14 @@ const CustomCard: React.FC<CardProps> = ({
   stack,
 }) => {
   const card = (
-    <Card>
+    <Card className="h-full flex flex-col">
       <CardHeader>
         <CardTitle className="text-base inline-flex ">
           <span className="border-b-2 hover:border-yellow-500">{title}</span>
         </CardTitle>
         <CardDescription>{description}</CardDescription>
       </CardHeader>
-      <CardContent>
+      <CardContent className="flex-grow">
         <div className="flex gap-2 items-center">
           {stack &&
             stack.map((tech, index) => {
@@ -107,13 +107,13 @@ const CustomCard: React.FC<CardProps> = ({
   );
 
   return href ? (
-    <Link to={href} className="flex w-full">
-      <div className="w-full">
+    <Link to={href} className="flex w-full h-full">
+      <div className="w-full h-full">
         {card}
       </div>
     </Link>
   ) : (
-    <div className="w-full">{card}</div>
+    <div className="w-full h-full">{card}</div>
   );
 };
 

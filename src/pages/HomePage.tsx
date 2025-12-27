@@ -122,7 +122,7 @@ export default function HomePage() {
               Featured Projects
               <MoveRight className="w-4 h-4" />
             </Link>
-            <div className="flex flex-col gap-6 md:grid md:grid-cols-3 mt-4">
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-4">
               <TeamPayCard />
               <TrackalackCard />
               <NotemonCard />
