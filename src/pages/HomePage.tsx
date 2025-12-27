@@ -15,6 +15,7 @@ import profileImageHover from "@/assets/my-notion-face-transparent (1).png";
 import whatnotLogo from "@/assets/logos/whatnot.png";
 import geicoLogo from "@/assets/logos/geico.png";
 import codeYourDreamsLogo from "@/assets/logos/codeyourdreams.png";
+import foodRecoveryLogo from "@/assets/cropped-FoodRecovery_AppleLogo_ColorUpdates-COLOR-NOTEXT.png";
 
 export default function HomePage() {
   return (
@@ -36,8 +37,8 @@ export default function HomePage() {
                   <span className="italic font-newsreader hover:text-yellow-500 cursor-pointer">
                     {SITE_CONFIG.description}
                   </span>{" "}
-                  This is what I do. I am {SITE_CONFIG.name}, and I love solving
-                  problems. I'm a student at the{" "}
+                  This is what I do. I am {SITE_CONFIG.name}. I'm a junior at
+                  the{" "}
                   <span className="italic font-newsreader hover:text-[#FF5F05] underline cursor-pointer">
                     {SITE_CONFIG.university}
                   </span>{" "}
@@ -107,7 +108,7 @@ export default function HomePage() {
                 title="TPM"
                 period="Fall 2024"
                 href="https://foodrecovery.org"
-                logo="/logo-light.svg"
+                logo={foodRecoveryLogo}
               />
             </div>
           </section>

@@ -5,6 +5,7 @@ interface ExperienceItemProps {
   logo?: string;
   href?: string;
   description?: string;
+  logoSize?: "small" | "default";
 }
 
 export default function ExperienceItem({
@@ -14,7 +15,10 @@ export default function ExperienceItem({
   logo,
   href,
   description,
+  logoSize = "default",
 }: ExperienceItemProps) {
+  const logoSizeClass = logoSize === "small" ? "w-6 h-6" : "w-8 h-8";
+  
   const content = (
     <div className="flex items-start gap-4 py-4 group">
       {logo && (
@@ -22,7 +26,7 @@ export default function ExperienceItem({
           <img
             src={logo}
             alt={`${company} logo`}
-            className="w-8 h-8 rounded-full object-cover grayscale-0 sm:grayscale sm:group-hover:grayscale-0 transition-all duration-200"
+            className={`${logoSizeClass} rounded-full object-cover grayscale-0 sm:grayscale sm:group-hover:grayscale-0 transition-all duration-200`}
           />
         </div>
       )}
