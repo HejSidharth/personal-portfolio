@@ -37,12 +37,12 @@ const BackButton: React.FC<BackButtonProps> = ({ title, href }) => {
 
   return (
     <>
-      {/* Desktop: Fixed position */}
-      <div className="px-10 hidden sm:block fixed">
+      {/* Desktop: Fixed position (lg and above) */}
+      <div className="px-10 hidden lg:block fixed">
         {backButtonContent}
       </div>
-      {/* Mobile: Inline */}
-      <div className="sm:hidden translate-x-[-20px] translate-y-[-30px]">
+      {/* Mobile and Medium: Inline */}
+      <div className="lg:hidden translate-x-[-20px] translate-y-[-30px] ml-6">
         {backButtonContent}
       </div>
     </>

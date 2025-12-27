@@ -107,11 +107,13 @@ const CustomCard: React.FC<CardProps> = ({
   );
 
   return href ? (
-    <Link to={href} className="flex">
-      {card}
+    <Link to={href} className="flex w-full">
+      <div className="w-full">
+        {card}
+      </div>
     </Link>
   ) : (
-    card
+    <div className="w-full">{card}</div>
   );
 };
 
