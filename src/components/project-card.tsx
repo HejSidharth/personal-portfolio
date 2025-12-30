@@ -253,3 +253,14 @@ export function FacesCard() {
     />
   );
 }
+
+export function ChordsCard() {
+  return (
+    <CustomCard
+      title="Chords"
+      description="A simple website for me and others to remember some chords"
+      href="https://chords.hejamadi.com"
+      stack={[]}
+    />
+  );
+}

@@ -58,10 +58,11 @@ Scrollbar thumb: #1A1A1A              /* Dark gray */
 Scrollbar track: #ffffff (light) / #1a1a1a (dark)
 Scrollbar hover: #555                 /* Medium gray */
 
-/* Hover States */
-Hover border: hsl(0, 0%, 38.8%)       /* neutral-600 */
-GitHub icon hover: hsl(0, 0%, 40%)    /* gray-400 */
-LinkedIn icon hover: hsl(221, 83%, 53%) /* blue-600 */
+/* Hover States - Primary Highlight Color */
+Hover border/color: #eab308            /* yellow-500 - Primary highlight color for the entire app */
+GitHub icon hover: #eab308             /* yellow-500 */
+LinkedIn icon hover: #eab308           /* yellow-500 */
+University link hover: #FF5F05         /* UIUC orange - Specific to university link */
 ```
 
 ## Typography
@@ -101,10 +102,14 @@ Tiny icons: w-2 h-2                   /* 8px × 8px */
 
 ```css
 /* Page Container */
-Max width: 600px
-Width: 50% on large screens (lg:w-1/2)
+Max width: 56rem (896px)               /* max-w-4xl */
 Centered: mx-auto
-Padding: px-10 (40px) on mobile, px-0 on sm and md
+Padding: px-6 (24px) on mobile, px-8 (32px) on sm, px-12 (48px) on lg
+Bottom padding: pb-24 (96px) for dock spacing
+
+/* Inner Content Container */
+Max width: 42rem (672px)               /* max-w-2xl */
+Centered: mx-auto
 
 /* Breakpoints */
 Mobile: < 640px (default)
@@ -146,21 +151,21 @@ Desktop: md:grid md:grid-cols-3       /* 3 columns on md+ */
 
 ```css
 /* Page Title */
-font-bold border-b-2 text-lg hover:border-neutral-600 inline-block font-inter
+font-bold border-b-2 text-lg hover:border-yellow-500 inline-block font-inter mb-4
 
 /* Section Headers */
-font-newsreader italic font-medium mt-10 border-b-2 w-max hover:border-neutral-600
+font-newsreader italic font-medium mt-10 border-b-2 w-max hover:border-yellow-500
 ```
 
 ### Links & Buttons
 
 ```css
 /* Text Links (with icon) */
-font-newsreader italic font-medium mt-10 border-b-2 w-max hover:border-neutral-600 flex items-center gap-2
+font-newsreader italic font-medium mt-10 border-b-2 w-max hover:border-yellow-500 flex items-center gap-2
 
-/* Icon Links */
-w-5 h-5 hover:text-gray-400          /* GitHub */
-w-5 h-5 hover:text-blue-600          /* LinkedIn */
+/* Icon Links - Dock Navigation */
+w-6 h-6 hover:text-yellow-500        /* All dock icons (Home, GitHub, LinkedIn, Theme) */
+text-muted-foreground                 /* Default state */
 ```
 
 ### Cards
@@ -168,9 +173,10 @@ w-5 h-5 hover:text-blue-600          /* LinkedIn */
 ```css
 /* Card Structure */
 - Uses shadcn/ui Card component
-- CardTitle: text-base inline-flex with border-b-2 hover:border-neutral-600
+- CardTitle: text-base inline-flex with border-b-2 hover:border-yellow-500
 - CardDescription: default shadcn styling
-- CardContent: contains tech stack icons
+- CardContent: contains tech stack icons (flex-grow for equal heights)
+- Card: h-full flex flex-col for grid layouts
 
 /* Tech Stack Icons */
 Size: h-4 w-4                         /* 16px × 16px */
@@ -183,7 +189,7 @@ Spacing: gap-2                        /* 8px between icons */
 ```css
 /* Underline Borders */
 border-b-2                            /* 2px bottom border */
-hover:border-neutral-600              /* Changes to medium gray on hover */
+hover:border-yellow-500               /* Changes to yellow on hover (primary highlight) */
 
 /* Card Borders */
 border rounded-2xl                    /* Full rounded corners, 16px radius */
@@ -254,15 +260,16 @@ transition: { duration: 2 }           /* 2 second fade in */
 
 ```css
 /* Border Hover */
-hover:border-neutral-600              /* Border color change */
+hover:border-yellow-500               /* Border changes to yellow (primary highlight) */
+hover:text-yellow-500                 /* Text color changes to yellow on hover */
 
 /* Icon Hover */
-hover:text-gray-400                   /* GitHub icon */
-hover:text-blue-600                   /* LinkedIn icon */
+hover:text-yellow-500                 /* All icons (dock, links) */
 hover:grayscale-0 hover:rotate-6      /* Tech stack icons */
 
 /* Image Hover */
 hover:grayscale-0 hover:rotate-6      /* Remove grayscale, rotate */
+group-hover:opacity-0/100             /* Profile picture crossfade */
 ```
 
 ## Typography Patterns
@@ -286,14 +293,14 @@ italic font-newsreader
 
 ```css
 /* Page/Section Title */
-font-bold border-b-2 text-lg hover:border-neutral-600 inline-block font-inter
+font-bold border-b-2 text-lg hover:border-yellow-500 inline-block font-inter mb-4
 ```
 
 ### Link Pattern
 
 ```css
 /* Text link with icon */
-font-newsreader italic font-medium mt-10 border-b-2 w-max hover:border-neutral-600 flex items-center gap-2
+font-newsreader italic font-medium mt-10 border-b-2 w-max hover:border-yellow-500 flex items-center gap-2
 ```
 
 ## Layout Patterns
@@ -301,9 +308,9 @@ font-newsreader italic font-medium mt-10 border-b-2 w-max hover:border-neutral-6
 ### Page Structure
 
 ```css
-/* Main Container */
-<div className="lg:w-1/2 max-w-[600px] justify-center mx-auto px-10 sm:px-0 md:px-0">
-  <div className="flex gap-4 flex-col">
+/* Main Container - PageContainer Component */
+<div className="max-w-4xl mx-auto px-6 sm:px-8 lg:px-12 pb-24">
+  <div className="flex flex-col gap-3 py-8 max-w-2xl mx-auto">
     {/* Content */}
   </div>
 </div>
@@ -313,8 +320,10 @@ font-newsreader italic font-medium mt-10 border-b-2 w-max hover:border-neutral-6
 
 ```css
 /* Section Header + Grid */
-<SectionHeader>Section Title</SectionHeader>
-<div className="flex flex-col gap-6 md:grid md:grid-cols-3">
+<button className="font-newsreader italic font-medium mt-10 border-b-2 w-max hover:border-yellow-500">
+  Section Title
+</button>
+<div className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-4">
   {/* Cards */}
 </div>
 ```
@@ -322,13 +331,14 @@ font-newsreader italic font-medium mt-10 border-b-2 w-max hover:border-neutral-6
 ### Header with Icons
 
 ```css
-<div className="flex justify-between items-center">
-  <button className="font-bold border-b-2 text-lg hover:border-neutral-600 inline-block font-inter">
-    Title
-  </button>
-  <div className="flex gap-3">
-    {/* Social icons */}
+<div className="flex items-start justify-between gap-8">
+  <div className="flex-1">
+    <button className="font-bold border-b-2 text-lg hover:border-yellow-500 inline-block font-inter mb-4">
+      Title
+    </button>
+    {/* Content */}
   </div>
+  {/* Profile Picture / Icons */}
 </div>
 ```
 
@@ -421,11 +431,13 @@ theme: {
 1. **Minimalism**: Clean, uncluttered design with plenty of white space
 2. **Typography Hierarchy**: Inter for body, Newsreader for emphasis
 3. **Subtle Interactions**: Borders as hover states, grayscale to color transitions
-4. **Centered Layout**: Max-width container (600px) centered on page
+4. **Centered Layout**: Max-width container (896px outer, 672px inner) centered on page
 5. **Dark Mode First**: Dark theme is the default
 6. **Border as Decoration**: Bottom borders used for titles and links instead of backgrounds
-7. **Grayscale Images**: Tech stack icons default to grayscale, color on hover
-8. **Consistent Spacing**: 4px base unit (gap-4, gap-6, mt-10)
+7. **Yellow Highlight**: Primary hover color is yellow (#eab308 / yellow-500) throughout the app
+8. **Grayscale Images**: Tech stack icons default to grayscale, color on hover
+9. **Consistent Spacing**: 4px base unit (gap-3, gap-4, gap-6, mt-10)
+10. **Fixed Bottom Dock**: Navigation dock fixed at bottom (pb-24 padding for spacing)
 
 ## Quick Reference
 
@@ -433,24 +445,30 @@ theme: {
 
 ```css
 /* Page Title */
-"font-bold border-b-2 text-lg hover:border-neutral-600 inline-block font-inter"
+"font-bold border-b-2 text-lg hover:border-yellow-500 inline-block font-inter mb-4"
 
 /* Section Header */
-"font-newsreader italic font-medium mt-10 border-b-2 w-max hover:border-neutral-600"
+"font-newsreader italic font-medium mt-10 border-b-2 w-max hover:border-yellow-500"
 
 /* Link with Icon */
-"font-newsreader italic font-medium mt-10 border-b-2 w-max hover:border-neutral-600 flex items-center gap-2"
+"font-newsreader italic font-medium mt-10 border-b-2 w-max hover:border-yellow-500 flex items-center gap-2"
 
 /* Body Text with Emphasis */
-"font-inter text-base" with nested "italic font-newsreader" spans
+"font-inter text-base" with nested "italic font-newsreader hover:text-yellow-500" spans
 
-/* Container */
-"lg:w-1/2 max-w-[600px] justify-center mx-auto px-10 sm:px-0 md:px-0"
+/* Container - Outer */
+"max-w-4xl mx-auto px-6 sm:px-8 lg:px-12 pb-24"
+
+/* Container - Inner Content */
+"flex flex-col gap-3 py-8 max-w-2xl mx-auto"
 
 /* Grid (Cards) */
-"flex flex-col gap-6 md:grid md:grid-cols-3"
+"grid grid-cols-1 md:grid-cols-3 gap-6 mt-4"
 
 /* Tech Icon */
 "h-4 w-4 grayscale hover:grayscale-0 hover:rotate-6"
+
+/* Dock Icon Hover */
+"text-muted-foreground hover:text-yellow-500 transition-colors"
 ```
 

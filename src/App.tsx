@@ -9,9 +9,9 @@ import { routeConfigs, notFoundRoute } from './config/routes';
 function App() {
   return (
     <ThemeProvider defaultTheme="dark" storageKey="vite-ui-theme">
-      <BrowserRouter>
+    <BrowserRouter>
         <Navbar />
-        <Routes>
+     <Routes>
           {routeConfigs.map((route) => {
             const Component = route.component;
             return (
@@ -23,10 +23,10 @@ function App() {
             path={notFoundRoute.path}
             element={<notFoundRoute.component />}
           />
-        </Routes>
+      </Routes>
         <DockNav />
-      </BrowserRouter>
-    </ThemeProvider>
+     </BrowserRouter>
+      </ThemeProvider>
   );
 }
 

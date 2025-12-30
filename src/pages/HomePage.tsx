@@ -3,7 +3,7 @@ import { MoveRight } from "lucide-react";
 import { motion } from "framer-motion";
 import { useState, useEffect } from "react";
 
-import { NotemonCard, TeamPayCard, FacesCard } from "@/components/project-card";
+import { TeamPayCard, FacesCard, ChordsCard } from "@/components/project-card";
 import PageContainer from "@/components/PageContainer";
 import ExperienceItem from "@/components/ExperienceItem";
 import { SITE_CONFIG, ROUTES } from "@/config/constants";
@@ -55,9 +55,19 @@ export default function HomePage() {
           {/* Header Section */}
           <div className="flex items-start justify-between gap-8">
             <div className="flex-1">
-              <button className="font-bold border-b-2 text-lg hover:border-yellow-500 inline-block font-inter mb-4">
-                {SITE_CONFIG.name}
-              </button>
+              <div className="flex items-center gap-2 mb-4">
+                {/* Small profile picture for mobile */}
+                <div className="sm:hidden flex-shrink-0">
+                  <img
+                    src={profileImage}
+                    alt={SITE_CONFIG.name}
+                    className="w-10 h-10 rounded-full object-cover border-2 border-border"
+                  />
+                </div>
+                <button className="font-bold border-b-2 text-lg hover:border-yellow-500 inline-block font-inter">
+                  {SITE_CONFIG.name}
+                </button>
+              </div>
               <div className="mt-4">
                 <p className="font-inter text-base">
                   <span className="italic font-newsreader hover:text-yellow-500 cursor-pointer">
@@ -160,7 +170,7 @@ export default function HomePage() {
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-4">
               <FacesCard />
               <TeamPayCard />
-              <NotemonCard />
+              <ChordsCard />
             </div>
           </section>
         </div>
