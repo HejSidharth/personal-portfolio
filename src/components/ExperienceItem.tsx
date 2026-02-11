@@ -20,7 +20,7 @@ export default function ExperienceItem({
   const logoSizeClass = logoSize === "small" ? "w-6 h-6" : "w-8 h-8";
   
   const content = (
-    <div className="flex items-start gap-4 py-4 group">
+    <div className="flex items-start gap-4 py-4 px-4 -mx-4 rounded-xl hover:bg-muted/50 transition-all group">
       {logo && (
         <div className="flex-shrink-0">
           <img
@@ -50,7 +50,7 @@ export default function ExperienceItem({
         href={href}
         target="_blank"
         rel="noopener noreferrer"
-        className="block hover:opacity-80 transition-opacity"
+        className="block no-underline"
       >
         {content}
       </a>

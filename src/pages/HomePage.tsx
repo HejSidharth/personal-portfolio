@@ -3,7 +3,7 @@ import { MoveRight } from "lucide-react";
 import { motion } from "framer-motion";
 import { useState, useEffect } from "react";
 
-import { TeamPayCard, FacesCard, ChordsCard } from "@/components/project-card";
+import ProjectItem from "@/components/ProjectItem";
 import PageContainer from "@/components/PageContainer";
 import ExperienceItem from "@/components/ExperienceItem";
 import { SITE_CONFIG, ROUTES } from "@/config/constants";
@@ -124,7 +124,7 @@ export default function HomePage() {
             <button className="font-newsreader italic font-medium mt-10 border-b-2 w-max hover:border-yellow-500">
               Work Experience
             </button>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-2 mt-4">
+            <div className="grid grid-cols-1 gap-0 mt-4">
               <ExperienceItem
                 company="WhatNot"
                 title="Incoming SWE Intern"
@@ -167,10 +167,37 @@ export default function HomePage() {
               Featured Projects
               <MoveRight className="w-4 h-4" />
             </Link>
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-4">
-              <FacesCard />
-              <TeamPayCard />
-              <ChordsCard />
+            <div className="grid grid-cols-1 gap-0 mt-4">
+              <ProjectItem
+                title="Faces"
+                subtitle="Avatar Generator"
+                description="A website to help people use avatars for their projects"
+                href="https://faces.hejamadi.com"
+              />
+              <ProjectItem
+                title="Team Pay"
+                subtitle="SaaS Platform"
+                description="Worked on a SAAS that helped business owners track pay"
+                href={ROUTES.projectsTeamPay}
+              />
+              <ProjectItem
+                title="Student Queue"
+                subtitle="Educational Tool"
+                description="A website created to queue students during tutoring classes."
+                href={ROUTES.projectsStudentQueue}
+              />
+              <ProjectItem
+                title="Trackalack"
+                subtitle="Productivity App"
+                description="A website created to track homework assignments for fellow students"
+                href={ROUTES.projectsTrackalack}
+              />
+              <ProjectItem
+                title="Notemon"
+                subtitle="Code Snippet Saver"
+                description="A website created to save code snippets for later use"
+                href={ROUTES.projectsNotemon}
+              />
             </div>
           </section>
         </div>

@@ -42,7 +42,7 @@ interface TechStackDictionary {
   [key: string]: { name: string; img: string };
 }
 
-const techStackDictionary: TechStackDictionary = {
+export const techStackDictionary: TechStackDictionary = {
   React: { name: "React", img: ReactLogo },
   Tailwind: { name: "Tailwind", img: TailwindLogo },
   Supabase: { name: "Supabase", img: SupabaseLogo },

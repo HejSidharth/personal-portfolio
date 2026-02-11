@@ -1,4 +1,5 @@
 import { ReactNode } from "react";
+import Footer from "./Footer";
 
 interface PageContainerProps {
   children: ReactNode;
@@ -11,8 +12,11 @@ interface PageContainerProps {
  */
 export default function PageContainer({ children, className = "" }: PageContainerProps) {
   return (
-    <div className={`max-w-4xl mx-auto px-6 sm:px-8 lg:px-12 pb-24 ${className}`}>
-      {children}
+    <div className={`flex flex-col min-h-screen max-w-4xl mx-auto px-6 sm:px-8 lg:px-12 pb-24 ${className}`}>
+      <div className="flex-grow">
+        {children}
+      </div>
+      <Footer />
     </div>
   );
 }
