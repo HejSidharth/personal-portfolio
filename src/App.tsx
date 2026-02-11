@@ -6,10 +6,20 @@ import DockNav from './components/DockNav';
 import Test from './Test';
 import { routeConfigs, notFoundRoute } from './config/routes';
 import { RobotModeProvider, useRobotMode } from './context/RobotModeContext';
+import { AccessibilityProvider } from './context/AccessibilityContext';
+import { TooltipProvider } from './components/ui/tooltip';
 import RobotView from './components/RobotView';
+import { useEffect } from 'react';
 
 function AppContent() {
   const { isRobotMode } = useRobotMode();
+
+  useEffect(() => {
+    console.log(
+      "%cHey, why are you looking at this? I hope I have no errors.",
+      "color: #fbbf24; font-size: 16px; font-weight: bold; font-family: monospace;"
+    );
+  }, []);
 
   return (
     <BrowserRouter>
@@ -36,9 +46,13 @@ function AppContent() {
 function App() {
   return (
     <ThemeProvider defaultTheme="dark" storageKey="vite-ui-theme">
-      <RobotModeProvider>
-        <AppContent />
-      </RobotModeProvider>
+      <AccessibilityProvider>
+        <TooltipProvider>
+          <RobotModeProvider>
+            <AppContent />
+          </RobotModeProvider>
+        </TooltipProvider>
+      </AccessibilityProvider>
     </ThemeProvider>
   );
 }
