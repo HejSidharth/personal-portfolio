@@ -4,7 +4,7 @@ Personal portfolio site built with React, TypeScript, and Vite to showcase proje
 
 ## Live Demo
 
-- Production URL: _Add deployed URL here_
+- Production URL: https://hejamadi.com
 
 ## Highlights
 
